@@ -19,7 +19,7 @@ Echo is a powerful, flexible, and easy-to-use Java event bus library that allows
 
 Here's a basic example of how to use Echo:
 
-<pre>
+```java
 import io.mxngo.echo.*;
 import io.mxngo.echo.core.*;
 import io.mxngo.echo.filter.*;
@@ -48,23 +48,23 @@ public class Example {
         }
     }
 }
-</pre>
+```
 
 <h3>Creating an EventBus</h3>
 
 To create an EventBus, use the StandardEventBus.Builder class:
 
-<pre>
+```java
     final IEventBus<String> eventBus = new StandardEventBus.Builder<String>()
         .withSubscriptionPool(new CachedSubscriptionPool<>())
         .build();
-        </pre>
+```
 
 <h3>Subscribing to Events</h3>
 
 To subscribe to events, create a subscriber class with a field annotated with @Callback:
 
-<pre>
+```java
 public final class Subscriber {
     @Callback
         private final EventCallback<String> onMessage = new EventCallback<>(this::handleMessage);
@@ -74,36 +74,36 @@ public final class Subscriber {
         }
     }
 }
-</pre>
+```
 
 Then, subscribe the instance of the class to the EventBus:
 
-<pre>
+```java
 final Subscriber subscriber = new Subscriber();
 eventBus.subscribe(subscriber);
-</pre>
+```
 
 <h3>Emitting Events</h3>
 
 To emit an event, call the emit method on the EventBus instance:
 
-<pre>
+```java
 eventBus.emit("Hello, EventBus!");
-</pre>
+```
 
 <h3>Unsubscribing from Events</h3>
 
 To unsubscribe a subscriber from the EventBus, call the unsubscribe method:
 
-<pre>
+```java
 eventBus.unsubscribe(subscriber);
-</pre>
+```
 
 <h3>Event Filtering</h3>
 
 You can use event filters to selectively process events. For example, you can use the StringFilter to filter events based on a string:
 
-<pre>
+```java
 public final class Subscriber {
     @Callback
     private final EventCallback<String> onMessage = new EventCallback<>(this::handleMessage,
@@ -113,6 +113,6 @@ public final class Subscriber {
         System.out.println("Received: " + message);
     }
 }
-</pre>
+```
 
 In this example, the handleMessage method will only be called if the emitted event contains the string "EventBus".
