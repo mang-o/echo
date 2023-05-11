@@ -15,6 +15,10 @@ public abstract class AbstractEventDispatcher<T> implements IEventDispatcher<T> 
         final EventCallback<T> callback = subscription.eventCallback();
         final IEventFilter[] filters = callback.getFilters();
 
+        if (!callback.getEventType().isInstance(event)) {
+            return;
+        }
+
         for (final IEventFilter filter : filters) {
             if (!filter.filter(event)) {
                 return;

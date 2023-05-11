@@ -2,7 +2,6 @@ package io.mxngo.echo;
 
 import io.mxngo.echo.filter.IEventFilter;
 
-import java.util.Arrays;
 import java.util.function.Consumer;
 
 /**
@@ -15,14 +14,17 @@ public final class EventCallback<T> {
 
     private final Consumer<T> callback;
     private final IEventFilter[] filters;
+    private final Class<T> eventType;
 
-    public EventCallback(final Consumer<T> callback) {
-        this(callback, new IEventFilter[0]);
+    public EventCallback(final Consumer<T> callback, final Class<T> eventType) {
+        this(callback, new IEventFilter[0], eventType);
     }
 
-    public EventCallback(final Consumer<T> callback, final IEventFilter... filters) {
+    public EventCallback(final Consumer<T> callback, final IEventFilter[] filters, Class<T> eventType) {
         this.callback = callback;
         this.filters = filters;
+
+        this.eventType = eventType;
     }
 
     public Consumer<T> getCallback() {
@@ -31,5 +33,9 @@ public final class EventCallback<T> {
 
     public IEventFilter[] getFilters() {
         return filters;
+    }
+
+    public Class<T> getEventType() {
+        return eventType;
     }
 }

@@ -41,7 +41,7 @@ public class Example {
 
     public static final class Subscriber {
         @Callback
-        private final EventCallback<String> onMessage = new EventCallback<>(this::handleMessage);
+        private final EventCallback<String> onMessage = new EventCallback<>(this::handleMessage, String.class);
 
         private void handleMessage(final String message) {
             System.out.println("Received: " + message);
@@ -67,7 +67,7 @@ To subscribe to events, create a subscriber class with a field annotated with @C
 ```java
 public final class Subscriber {
     @Callback
-        private final EventCallback<String> onMessage = new EventCallback<>(this::handleMessage);
+        private final EventCallback<String> onMessage = new EventCallback<>(this::handleMessage, String.class);
 
         private void handleMessage(final String message) {
             System.out.println("Received: " + message);
@@ -107,7 +107,7 @@ You can use event filters to selectively process events. For example, you can us
 public final class Subscriber {
     @Callback
     private final EventCallback<String> onMessage = new EventCallback<>(this::handleMessage,
-        new StringFilter<>("EventBus", String::toString));
+        new StringFilter<>("EventBus", String::toString), String.class);
 
     private void handleMessage(final String message) {
         System.out.println("Received: " + message);

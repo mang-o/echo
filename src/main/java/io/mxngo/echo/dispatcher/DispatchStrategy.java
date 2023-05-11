@@ -17,8 +17,8 @@ import java.util.concurrent.Executor;
 public final class DispatchStrategy<T> {
     private final IEventDispatcher<T> dispatcher;
 
-    public DispatchStrategy(final Optional<Executor> executor) {
-        this.dispatcher = executor.isPresent() ? new AsynchronousEventDispatcher<>(executor.get()) : new SynchronousEventDispatcher<>();
+    public DispatchStrategy(final Executor executor) {
+        this.dispatcher = executor != null ? new AsynchronousEventDispatcher<>(executor) : new SynchronousEventDispatcher<>();
     }
 
     public void dispatch(final T event, final List<ISubscription<T>> sortedSubscriptions) {

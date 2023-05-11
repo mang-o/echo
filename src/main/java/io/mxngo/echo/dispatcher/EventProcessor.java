@@ -22,6 +22,7 @@ public final class EventProcessor<T> {
 
     public void processEvent(final T event) {
         final List<ISubscription<T>> sortedSubscriptions = this.subscriptionPool.getSortedSubscriptions();
+
         dispatchStrategy.dispatch(event, sortedSubscriptions);
     }
 }

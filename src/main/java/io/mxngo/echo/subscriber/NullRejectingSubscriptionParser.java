@@ -24,7 +24,7 @@ public final class NullRejectingSubscriptionParser {
         return subscriptions;
     }
 
-    private static <T> ISubscription<T> parseSubscription(Object target, Field field) {
+    private static <T> ISubscription<T> parseSubscription(final Object target, final Field field) {
         if (!EventCallback.class.isAssignableFrom(field.getType())) {
             throw new IllegalArgumentException("Callback annotated fields must be of type EventCallback");
         }

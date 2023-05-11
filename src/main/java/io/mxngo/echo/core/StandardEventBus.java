@@ -20,7 +20,7 @@ public final class StandardEventBus<T> implements IEventBus<T> {
 
     private StandardEventBus(final Builder<T> builder) {
         this.subscriptionPool = builder.subscriptionPool;
-        final DispatchStrategy<T> dispatchStrategy = new DispatchStrategy<>(Optional.ofNullable(builder.executor));
+        final DispatchStrategy<T> dispatchStrategy = new DispatchStrategy<>(builder.executor);
         this.eventProcessor = new EventProcessor<>(subscriptionPool, dispatchStrategy);
     }
 
